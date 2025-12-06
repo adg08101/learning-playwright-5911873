@@ -1,12 +1,16 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Home page with no auth", () => {
+test.describe.parallel("Home page with no auth", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("https://practicesoftwaretesting.com/");
+    await page.waitForLoadState("networkidle");
   });
 
+    test.afterEach(async ({ page }) => {
+      console.log(`Finished test: ${test.info().title}`);
+    });
+
   test("visual test", async ({ page }) => {
-    await page.waitForLoadState("networkidle");
     await expect(page).toHaveScreenshot("home-page-no-auth.png", {
       mask: [page.getByTitle("Practice Software Testing - Toolshop")],
     });
@@ -33,6 +37,7 @@ test.describe("Home page with no auth", () => {
     await page.getByTestId("search-query").fill("Thor Hammer");
     await page.getByTestId("search-submit").click();
     await expect(productGrid.getByRole("link")).toHaveCount(1);
+    expect(await productGrid.getByRole("link").count()).toBe(1);
     await expect(page.getByAltText("Thor Hammer")).toBeVisible();
   });
 });
