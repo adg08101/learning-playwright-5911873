@@ -4,8 +4,9 @@ setup("Create customer 01 auth", async ({ page, context }) => {
   const email = "customer@practicesoftwaretesting.com";
   const password = "welcome01";
   const customer01AuthFile = ".auth/customer01.json";
+  const baseURL = `${setup.info().project?.use?.baseURL}/auth/login`;
 
-  await page.goto("https://practicesoftwaretesting.com/auth/login");
+  await page.goto(baseURL);
 
   await page.getByTestId("email").fill(email);
   await page.getByTestId("password").fill(password);

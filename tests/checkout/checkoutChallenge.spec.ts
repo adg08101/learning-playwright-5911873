@@ -21,7 +21,7 @@ test.describe("Checkout challenge", async () => {
     await page.getByTestId("city").fill("Sacramento");
     await page.getByTestId("state").fill("California");
     await page.getByTestId("country").fill("USA");
-    await page.getByTestId("postal_code").fill("98765");
+    await page.getByTestId(/postal/i).fill("98765");
     await page.getByTestId("proceed-3").click();
     await expect(page.getByTestId("finish")).toBeDisabled();
     await page.getByTestId("payment-method").selectOption("Buy Now Pay Later");
@@ -34,7 +34,7 @@ test.describe("Checkout challenge", async () => {
     );
     headless
       ? await test.step("visual test", async () => {
-          await expect(page).toHaveScreenshot("checkout.png", {
+          await expect(page).toHaveScreenshot("checkout1.png", {
             mask: [page.getByTitle("Practice Software Testing - Toolshop")],
           });
         })
