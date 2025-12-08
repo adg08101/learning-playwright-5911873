@@ -15,6 +15,7 @@ export default defineConfig({
   timeout: 30_000,
   globalTimeout: 10 * 60 * 1000,
   testDir: "./tests",
+  testMatch: /.*\.spec\.ts/,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -47,7 +48,7 @@ export default defineConfig({
     },
     {
       name: "chromium",
-      dependencies: ["setup"],
+      // dependencies: ["setup"],
       use: { ...devices["Desktop Chrome"], permissions: ["clipboard-read"] },
     },
     // {
