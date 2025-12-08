@@ -17,11 +17,14 @@ test("login without page object", { tag: ["@no_pom", "@login"] }, async ({ page 
   );
 });
 
-test("Login with page object", { tag: ["@pom", "@login"] }, async ({ page }) => {
+test("Login with page object", async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.goto();
-  await loginPage.emailInput.fill("customer@practicesoftwaretesting.com");
-  await loginPage.passwordInput.fill("welcome01");
-  await loginPage.loginButton.click();
+  // await loginPage.emailInput.fill("customer@practicesoftwaretesting.com");
+  // await loginPage.passwordInput.fill("welcome01");
+  // await loginPage.loginButton.click();
+
+  await loginPage.login();
+
   await expect(page.getByTestId("nav-menu")).toContainText("Jane Doe");
 });
