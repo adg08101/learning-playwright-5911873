@@ -1,13 +1,14 @@
-import {
-  test as base,
-  expect,
-} from "@playwright/test";
+import { test as base, expect } from "@playwright/test";
 
 type LoginContext = {
   loginFixture: string;
 };
 
-const loginContext = base.extend<LoginContext>({
+type WorkerContext = {
+  workerFixture: string;
+};
+
+const loginContext = base.extend<LoginContext, WorkerContext>({
   loginFixture: async ({ page, context }, use: any) => {
     // Setup code for the fixture can go here
 
@@ -29,6 +30,16 @@ const loginContext = base.extend<LoginContext>({
     await use();
     console.log("Tearing down login fixture with context.");
   },
+  workerFixture: [
+    async ({}, use: any, workerInfo) => {
+      const message = `Setting up worker fixture. ${workerInfo.workerIndex}`;
+      console.log(message);
+      // Setup code for the worker fixture can go here
+      await use(message);
+      console.log("Tearing down worker fixture.");
+    },
+    { scope: "worker" },
+  ],
 });
 
 export default loginContext;
