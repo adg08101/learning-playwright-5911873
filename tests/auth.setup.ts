@@ -1,6 +1,6 @@
 import { test as setup, expect } from "@playwright/test";
 
-setup("Create customer 01 auth", async ({ page, context }) => {
+setup.skip("Create customer 01 auth", async ({ page, context }) => {
   const email = "customer@practicesoftwaretesting.com";
   const password = "welcome01";
   const customer01AuthFile = ".auth/customer01.json";

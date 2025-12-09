@@ -1,4 +1,5 @@
 import fixture from "./fixture";
+import loginContext from "./setLoginContext";
 
 fixture("say hello", async ({ whatYouSay }) => {
   console.log("Hello, Playwright!");
@@ -10,4 +11,8 @@ fixture("say where is my candle", async ({}) => {
 
 fixture("say goodbye", async ({}) => {
   console.log("Goodbye, Playwright!");
+});
+
+loginContext("login and say hello", async ({ loginFixture }) => {
+  console.log("Hello after login fixture!");
 });
